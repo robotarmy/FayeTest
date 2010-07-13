@@ -21,9 +21,12 @@ function go(){
   client.publish('/'+channel, {text:text});
 };
 </script>
+channel
 <input id='in_channel' type='text' name='channel'></input>
+text
 <input id='in_text' type='text' name='text'></input>
 <input type='submit' name='submit' onclick="go();"></input>
+channel and text mash
 <textarea id='out_text'></textarea>
 
       
