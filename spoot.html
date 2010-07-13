@@ -1,0 +1,30 @@
+<script type="text/javascript" 
+        src="http://localhost:9090/faye.js">
+      </script>
+<script type="text/javascript">
+    var client = new Faye.Client('http://localhost:9090/faye', {
+        timeout: 120
+        });
+function write_out() {
+  var a = Array.prototype.slice.call(arguments);
+  for (var i=0;i < a.length; i++ ) {
+    document.getElementById('out_text').value += a[i];
+  };
+};
+function go(){
+  var channel = document.getElementById('in_channel').value;
+  var text = document.getElementById('in_text').value;
+  client.subscribe('/'+channel, function(message) {
+      var c = channel;
+      write_out(channel,message.text);
+    });
+  client.publish('/'+channel, {text:text});
+};
+</script>
+<input id='in_channel' type='text' name='channel'></input>
+<input id='in_text' type='text' name='text'></input>
+<input type='submit' name='submit' onclick="go();"></input>
+<textarea id='out_text'></textarea>
+
+      
+
